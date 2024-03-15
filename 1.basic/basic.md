@@ -41,18 +41,29 @@ typedef用法
 ```c++
 typedef char * pStr1;  
 #define pStr2 char *;  
-pStr1 s1, s2;  
+pStr1 s1, s2;
 pStr2 s3, s4;  
 ```
 
 - typedef可以用来简化代码：
 ```c++
-原声明：int *(*a[5])(int, char*);
-变量名为a，直接用一个新别名pFun替换a就可以了：
-typedef int *(*pFun)(int, char*); 
+void (*func_ptr)(int);
+// 使用 typedef 创建别名
+typedef void (*FunctionPointer)(int);
 
-原声明的最简化版：
-pFun a[5];
+void some_function(int value) {
+    printf("The value is: %d\n", value);
+}
+
+int main() {
+    FunctionPointer my_func_ptr;
+    // 赋值函数指针
+    my_func_ptr = &some_function;
+
+    my_func_ptr(10);
+
+    return 0;
+}
 ```
 - typedef可以用来简化代码：
 用typedef来定义与平台无关的类型。
