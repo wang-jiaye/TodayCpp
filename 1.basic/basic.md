@@ -26,13 +26,17 @@
 
 可以发现那对于这些基本类型呢，都可以有对应的修饰符来对其进行进一步的描述
 
-signed：表示变量可以存储负数。对于整型变量来说，signed 可以省略，因为整型变量默认为有符号类型
-unsigned：表示变量不能存储负数。对于整型变量来说，unsigned 可以将变量范围扩大一倍
-short：表示变量的范围比 int 更小。
-long：表示变量的范围比 int 更大。
+-  signed：表示变量可以存储负数。对于整型变量来说，signed 可以省略，因为整型变量默认为有符号类型
 
-**uint8_t / uint16_t / uint32_t /uint64_t 是什么数据类型?**
-这些数据类型是 C99 中定义的，要知道这个问题的话，需要先来了解typedef用法
+- unsigned：表示变量不能存储负数。对于整型变量来说，unsigned 可以将变量范围扩大一倍
+
+- short：表示变量的范围比 int 更小。
+
+- long：表示变量的范围比 int 更大。
+
+### **uint8_t / uint16_t / uint32_t /uint64_t 是什么数据类型?**
+
+typedef用法
 - typedef定义一种类型的别名，但是与#define相比不只是简单的宏替换。
 ```c++
 typedef char * pStr1;  
@@ -40,7 +44,7 @@ typedef char * pStr1;
 pStr1 s1, s2;  
 pStr2 s3, s4;  
 ```
-在上述的变量定义中，s1、s2、s3都被定义为char *，而s4则定义成了char，不是所预期的指针变量，根本原因就在于#define只是简单的字符串替换而typedef则是为一个类型起新名字。上例中define语句必须写成 pStr2 s3, *s4; 这这样才能正常执行。
+
 - typedef可以用来简化代码：
 ```c++
 原声明：int *(*a[5])(int, char*);
@@ -52,18 +56,17 @@ pFun a[5];
 ```
 - typedef可以用来简化代码：
 用typedef来定义与平台无关的类型。
-比如定义一个叫 REAL 的浮点类型，在目标平台一上，让它表示最高精度的类型为：
+比如定义一个叫 HEI 的浮点类型，在目标平台一上，让它表示最高精度的类型为：
 ```c++
-typedef long double REAL; 
+typedef long double HEI; 
 在不支持 long double 的平台二上，改为：
-typedef double REAL; 
+typedef double HEI; 
 在连 double 都不支持的平台三上，改为：
-typedef float REAL; 
+typedef float HEI; 
 也就是说，当跨平台时，只要改下 typedef 本身就行，不用对其他源码做任何修改。
-标准库就广泛使用了这个技巧，比如size_t。
 ```
 
-然后会在/usr/include/stdint.h文件中发现
+然后我们会在/usr/include/stdint.h文件中发现
 ```c++
 typedef signed char             int8_t;
 typedef short int               int16_t;
